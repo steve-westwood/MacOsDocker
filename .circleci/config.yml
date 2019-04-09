@@ -1,0 +1,25 @@
+version: 2
+
+jobs:
+    macOsWithDocker:
+        macos:
+            xcode: 10.1.0
+        shell: /bin/bash --login -eo pipefail
+
+        steps:
+            - run:
+                name: install docker for mac using brew
+                command: |
+                  brew cask install docker
+            - run:
+                name: start docker for mac
+                command: |
+                  open -a Docker
+            - run:
+                name: wait for docker to start
+                command: |
+                  sleep 60
+            - run:
+                name: list all docker containers (spoiler, there isn't any)
+                command: |
+                  docker ps
